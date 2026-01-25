@@ -1,7 +1,7 @@
 const incidents_div = document.getElementById("incidents");
 
 async function pullIssues() {
-    let response = await fetch("https://api.github.com/repos/DRKocourek/somedoctorAPIstatus/issues?state=all&per_page=100");
+    let response = await fetch("https://api.github.com/repos/DRKocourek/somedoctorAPIstatus/issues?state=all&per_page=20");
     let data = await response.json();
     return data;
 }
@@ -18,7 +18,7 @@ async function main(){
             let issue_type = issue.labels.find(label => label.name === "Maintenance");
             if (issue_type.name === "Maintenance"){
                 //check if it's still in progress/was resolved
-                let resolved = issue.labels.find(label => label.name === "resolved");
+                let resolved = issue.labels.find(label => label.name === "Resolved");
                 if (resolved === undefined) {
                     status.textContent = "In progress";
                     parent_div.setAttribute("class", "maintenance_incident");
@@ -29,7 +29,7 @@ async function main(){
             } else {
                 issue_type = issue.labels.find(label => label.name === "Outage");
                 parent_div.setAttribute("class", "maintenance_incident");
-                let resolved = issue.labels.find(label => label.name === "resolved");
+                let resolved = issue.labels.find(label => label.name === "Resolved");
                 if(resolved === undefined) {
                     status.textContent = "Investigating";
                 } else {
