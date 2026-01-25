@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>someDoctorAPI Status</h1>
+        <br>
+        <br>
+        <div id="statuses">
+            <h2>24data: <span id="24data" class="unknown">Unknown</span></h2>
+            <h2>someDoctorAPI backend: <span id="backend" class="online">Online</span></h2>
+            <h2>Cloudflare Tunnels: <span id="tunnels" class="online">Online</span></h2>
+            <h2>Cloudflare Prague(PRG): <span id="prg" class="online">Online</span></h2>
+            <h2>Github pages: <span id="pages" class="online">Online</span></h2>
+        </div>
+        <br>
+        <br>
+        <br>
+        <h2>Incidents: </h2>
+        <div id="incidents"></div>
+            <div class="resolved">
+                <h3>Test incident</h3>
+                <i>Resolved</i>
+                <p>The incident making the 24planner unavailable was quickly resolved</p>
+            </div>
+        </div>
+        <script src="statuscheck.js"></script>
+        <script src="incidenttracker.js"></script>
+    </body>
+</html>
