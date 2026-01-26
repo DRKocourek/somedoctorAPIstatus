@@ -40,6 +40,18 @@ async function main(){
             let incident_title = document.createElement("h3");
             incident_title.textContent = issue.title;
             parent_div.appendChild(incident_title);
+            let incident_time = document.createElement("i");
+            incident_time.textContent = new Date(issue.created_at).toLocaleString('en-GB', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }) + " UTC";
+            parent_div.appendChild(incident_time);
+            parent_div.appendChild(document.createElement("br"));
             parent_div.appendChild(status);
             let incident_description = document.createElement("p");
             incident_description.textContent = issue.body;

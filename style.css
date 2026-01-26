@@ -43,7 +43,7 @@ body {
     border-radius: 15px;
     line-height: 20%;
 }
-.resolved p, .maintenance_incident p, .investigating p {
+.resolved p, .maintenance_incident p, .investigating p, .resolved i, .maintenance_incident i, .investigating i  {
     line-height: normal;
 }
 .maintenance_incident {
