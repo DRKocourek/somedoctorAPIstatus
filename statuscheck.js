@@ -92,7 +92,6 @@ async function main() {
         backend.textContent = "Offline";
     }
     let dataStatus = await getAPIStatus();
-    console.log(backendStatus);
     if (backendStatus) {
       if (dataStatus) {
           hostapi.setAttribute('class', 'online');
