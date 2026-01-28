@@ -14,8 +14,10 @@ async function main(){
             let parent_div = document.createElement("div");
             let status = document.createElement("i");
 
-            //check if it's a maintenance
+            //check if it's a maintenance            
             let issue_type = issue.labels.find(label => label.name === "Maintenance");
+            try{
+
             if (issue_type.name === "Maintenance"){
                 //check if it's still in progress/was resolved
                 let resolved = issue.labels.find(label => label.name === "Resolved");
@@ -26,7 +28,12 @@ async function main(){
                     status.textContent = "Resolved";
                     parent_div.setAttribute("class", "resolved");
                 }
-            } else {
+            } 
+            } catch(err) {
+
+            } 
+            try {
+            if (issue_type.name === "Outage") {
                 issue_type = issue.labels.find(label => label.name === "Outage");
                 parent_div.setAttribute("class", "maintenance_incident");
                 let resolved = issue.labels.find(label => label.name === "Resolved");
@@ -35,6 +42,9 @@ async function main(){
                 } else {
                     status.textContent = "Resolved";
                 }
+            }
+            } catch(err) {
+                
             }
             incidents_div.appendChild(parent_div);
             let incident_title = document.createElement("h3");
