@@ -33,18 +33,21 @@ async function main(){
 
             } 
             try {
-            if (issue_type.name === "Outage") {
+                console.log("test1");
                 issue_type = issue.labels.find(label => label.name === "Outage");
-                parent_div.setAttribute("class", "maintenance_incident");
+            if (issue_type.name === "Outage") {
+                console.log("test2");
                 let resolved = issue.labels.find(label => label.name === "Resolved");
                 if(resolved === undefined) {
+                    parent_div.setAttribute("class", "investigating");
                     status.textContent = "Investigating";
                 } else {
+                    parent_div.setAttribute("class", "resolved");
                     status.textContent = "Resolved";
                 }
             }
             } catch(err) {
-                
+
             }
             incidents_div.appendChild(parent_div);
             let incident_title = document.createElement("h3");
