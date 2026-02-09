@@ -3,6 +3,9 @@ const backend = document.getElementById("backend");
 const tunnels = document.getElementById("tunnels");
 const prg = document.getElementById("prg");
 const pages = document.getElementById("pages");
+const eu01 = document.getElementById("eu-prg-01");
+const eu02 = document.getElementById("eu-prg-02");
+
 
 async function getGithubPagesStatus() {
   const response = await fetch("https://www.githubstatus.com/api/v2/summary.json");
@@ -19,7 +22,7 @@ async function getGithubPagesStatus() {
   }
 }
 
-async function getBackendStatus() {
+async function getEU01Status() {
   let response
   try{
     response = await fetch("https://somedoctorapi.drkocourek.stream/api/teapot");
@@ -32,6 +35,21 @@ async function getBackendStatus() {
       return false;
     }
 }
+
+async function getEU02Status() {
+  let response
+  try{
+    response = await fetch("https://somedoctorapi-eu-prg02.drkocourek.stream/api/teapot");
+  } catch(err) {
+    return false;
+  }
+    if (response.status == 418) {
+      return true;
+    } else {
+      return false;
+    }
+}
+
 
 async function getAPIStatus(){
   let response = await fetch("https://somedoctorapi.drkocourek.stream/api/datahealth");
@@ -83,11 +101,28 @@ async function main() {
         pages.setAttribute('class', 'offline');
         pages.textContent = "Offline";
     }
-    let backendStatus = await getBackendStatus();
-    if (backendStatus) {
+    let backendStatus = false;
+    let eu01Status = await getEU01Status();
+    if (eu01Status) {
         backend.setAttribute('class', 'online');
         backend.textContent = "Online";
+        eu01.setAttribute('class', 'online');
+        eu01.textContent = "Online";
+        backendStatus = true;
     } else {
+        eu01.setAttribute('class', 'offline');
+        eu01.textContent = "Offline";
+    }
+    let eu02Status = await getEU01Status();
+    if (eu02Status) {
+        backend.setAttribute('class', 'online');
+        backend.textContent = "Online";
+        eu02.setAttribute('class', 'online');
+        eu02.textContent = "Online";
+        backendStatus = true;
+    } else {
+        eu02.setAttribute('class', 'offline');
+        eu02.textContent = "Offline";
         backend.setAttribute('class', 'offline');
         backend.textContent = "Offline";
     }

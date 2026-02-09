@@ -33,10 +33,8 @@ async function main(){
 
             } 
             try {
-                console.log("test1");
                 issue_type = issue.labels.find(label => label.name === "Outage");
             if (issue_type.name === "Outage") {
-                console.log("test2");
                 let resolved = issue.labels.find(label => label.name === "Resolved");
                 if(resolved === undefined) {
                     parent_div.setAttribute("class", "investigating");
