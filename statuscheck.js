@@ -113,7 +113,7 @@ async function main() {
         eu01.setAttribute('class', 'offline');
         eu01.textContent = "Offline";
     }
-    let eu02Status = await getEU01Status();
+    let eu02Status = await getEU02Status();
     if (eu02Status) {
         backend.setAttribute('class', 'online');
         backend.textContent = "Online";
