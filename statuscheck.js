@@ -25,7 +25,7 @@ async function getGithubPagesStatus() {
 async function getEU01Status() {
   let response
   try{
-    response = await fetch("https://somedoctorapi.drkocourek.stream/api/teapot");
+    response = await fetch("https://somedoctorapi-eu-prg01.drkocourek.stream/api/teapot");
   } catch(err) {
     return false;
   }
@@ -51,8 +51,13 @@ async function getEU02Status() {
 }
 
 
-async function getAPIStatus(){
-  let response = await fetch("https://somedoctorapi.drkocourek.stream/api/datahealth");
+async function getAPIStatus(eu01Status, eu02Status){
+  let response;
+  if (eu01Status) {
+    response = await fetch("https://somedoctorapi-eu-prg01.drkocourek.stream/api/datahealth");
+  } else if (eu02Status) {
+    response = await fetch("https://somedoctorapi-eu-prg02.drkocourek.stream/api/datahealth");
+  }
   let data = await response.json();
   if (data) {
     return true;
@@ -123,10 +128,13 @@ async function main() {
     } else {
         eu02.setAttribute('class', 'offline');
         eu02.textContent = "Offline";
+    }
+
+    if (!eu01Status && !eu02Status) {
         backend.setAttribute('class', 'offline');
         backend.textContent = "Offline";
     }
-    let dataStatus = await getAPIStatus();
+    let dataStatus = await getAPIStatus(eu01Status, eu02Status);
     if (backendStatus) {
       if (dataStatus) {
           hostapi.setAttribute('class', 'online');
